@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 
 
 const clarifaiLib = require('../lib/Clarifai/clarifai');
-// const watsonLib = require('../lib/Watson/watson');
+const watsonLib = require('../lib/Watson/watson');
 
 const configure = (app) => {
   // check for required env
@@ -20,6 +20,11 @@ const configure = (app) => {
   let clarifai = clarifaiLib({
     clientId: process.env.CLARIFAI_CLIENT_ID,
     clientSecret: process.env.CLARIFAI_CLIENT_SECRET
+  });
+
+  let watson = watsonLib({
+    username: process.env.SERVICE_NAME_USERNAME,
+    password: process.env.SERVICE_NAME_PASSWORD
   });
 
   app.post(`/api/${VERSION}/clarifai/predictURL`, (req, res) => {
