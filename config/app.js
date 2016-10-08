@@ -1,3 +1,5 @@
+'use strict';
+
 const VERSION = 'V1';
 
 const express = require('express');
