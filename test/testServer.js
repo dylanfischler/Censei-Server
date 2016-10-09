@@ -27,7 +27,7 @@ app.post('/uploadImage', (req, res) => {
       (result) => {
         console.log("result", result);
         // res.status(200).send(result);
-        res.render(__dirname + '/views/status', { safe: result.safe });
+        res.render(__dirname + '/views/status', { result: result });
       },
       (error) => {
         console.log("error", error);
