@@ -25,7 +25,7 @@ const configure = (app) => {
     clientSecret: process.env.CLARIFAI_CLIENT_SECRET
   });
 
-  app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
+  app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
   app.use(bodyParser.json({limit: '50mb'}))
 
   // let watson = watsonLib({
@@ -34,8 +34,17 @@ const configure = (app) => {
   // });
 
   app.post(`/api/${VERSION}/clarifai/predictImage`, (req, res) => {
-    console.log('has a body? ', (req.body.file));
-    
+    // console.log('has a body? ', (req.body.file));
+    // console.log("processing image...", req.body.file);
+    clarifai.predictImage({ image: req.body.file }).then(
+      (response) => {
+        console.log("RESPONSE", JSON.stringify(response));
+        // res.status(200).send(response);
+      }).catch((err) => {
+        console.log("ERROR", err);
+        // console.error(err);
+        // res.status(500).send(err)
+    });
   });
 
   

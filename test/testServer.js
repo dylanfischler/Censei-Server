@@ -19,7 +19,7 @@ app.post('/uploadImage', (req, res) => {
       }, function (err, r, body) {
         // do handling here
         res.send("Done!");
-      }).form({file: fileBuffer.toString()})
+      }).form({file: fileBuffer.toString('base64')})
     }))
   });
 });
