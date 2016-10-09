@@ -10,7 +10,9 @@ let app = express();
 
 app.use(busboy());
 
-const censei = censeiClient({ server_path: 'http://localhost:8080'});
+const censei = censeiClient({ server_path: 'http://54.244.186.226:8080'});
+
+app.get('/test', (req, res) => res.sendFile(__dirname + '/test.html'));
 
 app.post('/uploadImage', (req, res) => {
   let fullFileBuffer, text;

@@ -1,18 +1,46 @@
 <html>
   <head>
     <title>This is a title, banana pants mchenry</title>
+    <style>
+      .content {
+        width:100%;
+        max-width: 500px;
+        margin: 0 auto;
+        font-family: Helvetica Neue, Arial;
+      }
+
+      hr {
+        border-style: solid;
+        border-width: 1px;
+        color: #e0e0e0;
+      }
+
+      form > div {
+        margin: 10px 0;
+      }
+    </style>
   </head>
   <body>
-    <form action="http://localhost:9999/uploadImage" method="POST" enctype="multipart/form-data">
-      <div>
-        <label>Description:</label>
-        <input type="text" name="text"/>
-      </div>
-      <div>
-        <label>Image:</label>
-        <input type="file" name="image"/>
-      </div>
-      <button type="submit">Upload</button>
-    </form>
+    <div class="content">
+      <h2>Welcome to Censei</h2>
+      <p>This is a basic "Image Post" form. The user chooses an image, adds a description, and clicks Post.</p>
+      <p>Behind the scenes, the server sends the Post data to our service, and we determine if the Post is safe to share.</p>
+      <p>This is done with a combination of Clarifai's Image recognition services, IBM Watson's Tone Analysis service, and our own post-processing.</p>
+
+      <hr/>
+
+      <form action="http://localhost:9999/uploadImage" method="POST" enctype="multipart/form-data">
+        <h3>Post an Image</h3>
+        <div>
+          <label>Image:</label>
+          <input type="file" name="image"/>
+        </div>
+        <div>
+          <label>Description:</label>
+          <textarea name="text"></textarea>
+        </div>
+        <button type="submit">Post</button>
+      </form>
+    </div>
   </body>
 </html>
