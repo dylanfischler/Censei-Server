@@ -5,12 +5,14 @@ const busboy = require('connect-busboy');
 const request = require('request');
 const concat = require('concat-stream');
 const censeiClient = require('censei-client');
+const ejs = require('ejs');
 
 let app = express();
 
 app.use(busboy());
+app.set('view engine', 'ejs');
 
-const censei = censeiClient({ server_path: 'http://54.244.186.226:8080'});
+const censei = censeiClient({ server_path: 'http://localhost:8080'});
 
 app.get('/test', (req, res) => res.sendFile(__dirname + '/test.html'));
 
@@ -24,7 +26,8 @@ app.post('/uploadImage', (req, res) => {
     }).then(
       (result) => {
         console.log("result", result);
-        res.status(200).send(result);
+        // res.status(200).send(result);
+        res.render(__dirname + '/views/status', { safe: result.safe });
       },
       (error) => {
         console.log("error", error);
