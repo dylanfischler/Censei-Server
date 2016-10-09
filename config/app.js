@@ -25,8 +25,8 @@ const configure = (app) => {
     clientSecret: process.env.CLARIFAI_CLIENT_SECRET
   });
 
-  // app.use(bodyParser.json());
-  app.use(bodyParser());
+  app.use(bodyParser.urlencoded({ extended: false, limit: '50mb' }))
+  app.use(bodyParser.json({limit: '50mb'}))
 
   // let watson = watsonLib({
   //   username: process.env.SERVICE_NAME_USERNAME,
@@ -34,31 +34,8 @@ const configure = (app) => {
   // });
 
   app.post(`/api/${VERSION}/clarifai/predictImage`, (req, res) => {
-    console.log('got a request');
-    console.log('has a body? ', (req.body));
-    console.log('has a data? ', (req.data));
-    console.log('has a query? ', (req.query));
-
-
-    // req.pipe(req.busboy);
-    // req.busboy.on('file', function (fieldname, file, filename) {
-    //     file.pipe(request.post('http://localhost:8080/api/V1/clarifai/predictImage'));
-
-    //     file.on('data', function(data) {
-    //       console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
-    //     });
-    // });
-
-    // if(!req.body.url) return res.status(400).send('Missing URL parameter');
-    // clarifai.predictURL({ url: req.body.url }).then(
-    //   (response) => {
-    //     res.status(200).send(response);
-    //   }).catch((err) => {
-    //     console.error(err);
-    //     res.status(500).send(err)
-    // });
-
-    // console.log("req", req);
+    console.log('has a body? ', (req.body.file));
+    
   });
 
   
