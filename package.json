@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha test"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,19 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "clarifai": "^2.0.9",
-    "express": "^4.14.0"
+    "concat-stream": "^1.5.2",
+    "connect-busboy": "0.0.2",
+    "express": "^4.14.0",
+    "formidable": "^1.0.17",
+    "multer": "^1.2.0",
+    "stream-body-parser": "0.0.1",
+    "watson-developer-cloud": "^2.4.6"
+  },
+  "devDependencies": {
+    "assert": "^1.4.1",
+    "mocha": "^3.1.0",
+    "request": "^2.75.0",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0"
   }
 }
