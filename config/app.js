@@ -59,19 +59,23 @@ const configure = (app) => {
       }
       else if(results.clarifai && results.watson) {
         // console.log("haz resultz", results);
-        verification.isValid(results);
+        let validation = verification.isValid(results);
+        console.log(`valid: ${validation.valid}`);
+        res.status(200).send({
+          safe: validation.valid
+        });
       }
     }
 
 
     clarifai.predictImage({ image: req.body.file }).then(
       (response) => {
-        console.log("clarifai:got a response");
+        // console.log("clarifai:got a response");
         results.clarifai = response;
         checkResults();
       },
       (error) => {
-        console.log("clarifai: error");
+        // console.log("clarifai: error");
         errors.clarifai = error;
         checkResults();
       });
@@ -79,12 +83,12 @@ const configure = (app) => {
     watson.analyze({ text: req.body.text || "" }).then(
       (response) => {
         // results.watson = response;
-        console.log("watson:got a response");
+        // console.log("watson:got a response");
         results.watson = response;
         checkResults();
       },
       (error) => {
-        console.log("watson:got a response");
+        // console.log("watson:got a response");
         errors.watson = error;
         checkResults();
       });

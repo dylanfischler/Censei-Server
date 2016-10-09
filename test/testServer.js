@@ -13,19 +13,40 @@ app.use(busboy());
 const censei = censeiClient({ server_path: 'http://localhost:8080'});
 
 app.post('/uploadImage', (req, res) => {
-  req.pipe(req.busboy);
-  req.busboy.on('file', function (fieldName, fileStream, fileName, encoding, mimeType) {
-    fileStream.pipe(concat(function (fileBuffer) {
-      censei.isThisSafe({ image: fileBuffer, text: "" });
+  let fullFileBuffer, text;
 
-      // request.post({
-      //   url: 'http://localhost:8080/api/V1/clarifai/predictImage'
-      // }, function (err, r, body) {
-      //   // do handling here
-      //   res.send("Done!");
-      // }).form({file: fileBuffer.toString('base64')})
+  var processUpload = () => {
+    censei.isThisSafe({ 
+      image: fullFileBuffer, 
+      text: text 
+    }).then(
+      (result) => {
+        console.log("result", result);
+        res.status(200).send(result);
+      },
+      (error) => {
+        console.log("error", error);
+        res.status(500).send(error);
+      }
+    )
+  };
+
+  req.pipe(req.busboy);
+  
+  // get fields
+  req.busboy.on('field', (fieldname, val) => {
+    if(fieldname === "text") text = val;
+  });
+
+  // get files
+  req.busboy.on('file', (fieldName, fileStream, fileName, encoding, mimeType) => {
+    fileStream.pipe(concat((fileBuffer) => {
+      fullFileBuffer = fileBuffer;
     }))
   });
+
+  req.busboy.on('finish', () => processUpload());
+
 });
 
 

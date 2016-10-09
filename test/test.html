@@ -4,7 +4,14 @@
   </head>
   <body>
     <form action="http://localhost:9999/uploadImage" method="POST" enctype="multipart/form-data">
-      <input type="file" name="image"/>
+      <div>
+        <label>Description:</label>
+        <input type="text" name="text"/>
+      </div>
+      <div>
+        <label>Image:</label>
+        <input type="file" name="image"/>
+      </div>
       <button type="submit">Upload</button>
     </form>
   </body>
