@@ -4,6 +4,7 @@ const VERSION = 'V1';
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const ejs = require('ejs');
 
 const clarifaiLib = require('../lib/Clarifai/clarifai');
 const watsonLib = require('../lib/Watson/watson');
@@ -23,6 +24,7 @@ const configure = (app) => {
     process.exit(0);
   }
 
+  app.set('view engine', 'ejs');
   app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
   app.use(bodyParser.json({limit: '50mb'}))
 
@@ -35,6 +37,8 @@ const configure = (app) => {
     username: process.env.SERVICE_NAME_USERNAME,
     password: process.env.SERVICE_NAME_PASSWORD
   });
+
+  app.get('/', (req, res) => res.render(__dirname + '/views/site'))
 
   app.post(`/api/${VERSION}/clarifai/predictImage`, (req, res) => {
     // console.log('has a body? ', (req.body.file));

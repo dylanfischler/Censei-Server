@@ -1,0 +1,165 @@
+<html>
+  <head>
+    <title>censei</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300|Raleway:300" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/index.js"></script>
+    <style>
+      .header { 
+        margin-top: 10%;
+        text-align: center;
+      }
+
+      img {
+        height: 15%;
+      }
+
+      .title {
+        margin-top: 10px;
+        font-size: 70px;
+        font-family: 'Raleway', sans-serif;
+        margin-bottom: 0;
+      }
+
+      .subtitle {
+        font-size: 30px;
+        font-family: 'Josefin Sans', sans-serif;
+      }
+
+      .selection {
+        margin-top: 50px;
+        text-align: center;
+      }
+
+      .button {
+        margin: 0 55 0 55;
+        font-family: 'Josefin Sans', sans-serif;
+        font-size: 25px;
+        color: #504F57;
+      }
+
+      .button:hover {
+        color: #000;
+        cursor: pointer;
+        text-decoration: underline;
+        /*text-decoration-line: .5px;*/
+      }
+
+      .explanations {
+        font-family: 'Josefin Sans', sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+
+      .about {
+        display: none;
+      }
+
+      .facts {
+        font-size: 25px;
+      }
+
+      .number {
+        color: #EE342F;
+        font-weight: 600;
+      }
+
+      .information {
+        font-family: 'Raleway', sans-serif;
+        font-size: 18px;
+      }
+
+      .italics {
+        font-style: italic;
+      }
+
+      #bold {
+        font-weight: 600;
+      }
+
+      .contact {
+        display: none;
+        font-family: 'Raleway', sans-serif;
+        font-size: 18px;
+      }
+    </style>
+    <script>
+      $(document).ready(function() {
+        $('#about-button').click(function() {
+          $('.contact').fadeOut();
+          $('.selection').fadeOut(600);
+          $('.header').fadeOut(900, function() { 
+            $('.header').css('margin-top', '1%');
+            $('.header').fadeIn();
+            $('.selection').fadeIn();
+            $('.contact').fadeOut(function() {
+              $('.explanations').fadeIn(600, function() {
+              $('.about').fadeIn();
+              }); 
+            });
+          });
+        });
+
+        $('#contact-button').click(function() {
+          $('.about').fadeOut();
+          $('.selection').fadeOut(600);
+          $('.header').fadeOut(900, function() { 
+            $('.header').css('margin-top', '5%');
+            $('.header').fadeIn();
+            $('.selection').fadeIn();
+            $('.about').fadeOut(function() {
+              $('.explanations').fadeIn(600, function() {
+              $('.contact').fadeIn();
+              }); 
+            });
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="header">
+      <p class="title">censei</p>
+      <p class="subtitle">We're all about preventing harassment.</p>
+    </div>
+    <div class="selection">
+      <span class="button" id="about-button">about</span>
+      <span class="button" id="contact-button">contact</span>
+    </div>
+    <div class="explanations">
+      <div class="about">
+        <div class="facts">
+          <p>
+            <span class="number">1</span> in <span class="number">4</span> internet users have seen someone physically threatened online.
+          </p>
+          <p>
+            <span class="number">1</span> in <span class="number">5</span> internet users have witnessed someone being sexually harassed or stalked online.
+          </p>
+          <p>
+            <span class="number">70%</span> of 18-24 year olds have been the target of online harassment.
+          </p>
+        </div>
+        <br>
+        <div class="information">
+          <p>
+            Combining the word, <span class="italics">censor</span> and <span class="italics">sensei</span>, which means teacher in Japanese, 
+          </p>
+          <p>
+            our aim is to raise awareness of online harassment and prevent it from happening.
+          </p> 
+          <br>
+          <p>
+            We care about the safety and acknowledge the emotional impact of harassed victims. <span id="bold">Nobody deserves to be harassed.</span>
+          </p>
+          <br>
+          <p class="facts">We are all humans. Our emotions matter.</p>
+        </div>
+      </div>
+      <div class="contact">
+        <p>Got feedback?</p>
+        <p>Email us at <span id="bold">hello@censei.me</span></p>
+      </div>
+    </div>
+  </body>
+</html>
